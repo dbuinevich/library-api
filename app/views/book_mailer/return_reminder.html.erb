@@ -1,0 +1,19 @@
+<p>Hello <%= @reader.full_name %>,</p>
+
+<p>
+  This is a reminder to return the book:
+</p>
+
+<ul>
+  <li><strong>Title:</strong> <%= @book.title %></li>
+  <li><strong>Author:</strong> <%= @book.author %></li>
+  <li><strong>Due date:</strong> <%= @due_date.to_date %></li>
+</ul>
+
+<% if @days_left.positive? %>
+  <p>Please return the book within <%= @days_left %> days.</p>
+<% else %>
+  <p><strong>The book is due today.</strong></p>
+<% end %>
+
+<p>Thank you,<br>Library team</p>
