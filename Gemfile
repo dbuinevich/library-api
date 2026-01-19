@@ -9,6 +9,7 @@ gem "bootsnap", require: false
 # API helpers
 gem "active_model_serializers", "~> 0.10.16"
 gem "sidekiq"
+gem "sidekiq-cron"
 
 # CORS support
 gem "rack-cors"

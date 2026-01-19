@@ -35,7 +35,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_16_214159) do
     t.datetime "returned_at"
     t.datetime "updated_at", null: false
     t.index ["book_id"], name: "index_borrow_histories_on_book_id"
+    t.index ["borrowed_at"], name: "index_borrow_histories_on_borrowed_at"
     t.index ["reader_id"], name: "index_borrow_histories_on_reader_id"
+    t.index ["returned_at"], name: "index_borrow_histories_on_returned_at"
   end
 
   create_table "readers", force: :cascade do |t|

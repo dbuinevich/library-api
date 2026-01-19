@@ -9,5 +9,8 @@ class CreateBorrowHistories < ActiveRecord::Migration[8.1]
 
       t.timestamps
     end
+
+    add_index :borrow_histories, :borrowed_at
+    add_index :borrow_histories, :returned_at
   end
 end

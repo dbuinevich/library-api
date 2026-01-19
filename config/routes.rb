@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  resources :books do
+  resources :books, except: [:edit, :update] do
     member do
-      put :update_status
+      patch :update_status
     end
   end
 end

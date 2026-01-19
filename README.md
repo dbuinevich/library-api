@@ -35,3 +35,41 @@ To run tests inside Docker:
 - POST	/books	Add a new book
 - PUT	/books/:id/update_status	Update book as borrowed or returned
 - DELETE	/books/:id	Delete a book
+
+## Key Design Decisions
+
+### Service Objects:
+
+BorrowBook and ReturnBook encapsulate business logic for borrowing and returning books.
+
+Atomicity guaranteed with ActiveRecord::Base.transaction to prevent inconsistent state between Book and BorrowHistory.
+
+### Reminder Emails:
+
+Handled by ReminderJob using ActiveJob and scheduled DueDatesCheckerJob.
+
+Uses letter_opener in development for previewing emails in the browser instead of sending real emails.
+
+### Database Indexing:
+
+borrowed_at and returned_at are indexed for faster queries on active borrowings.
+
+## Limitations & Future Improvements
+
+### Authentication & Authorization: 
+Currently omitted for simplicity. Could add JWT-based or Devise-based auth.
+
+### Email Delivery in Production: 
+Currently uses letter_opener for preview; needs SMTP or SendGrid setup in production.
+
+### Pagination: 
+/books endpoint returns all records; could add pagination for performance.
+
+### Validation Enhancements: 
+Currently only basic validation; could add more sophisticated checks or constraints.
+
+### Error Handling: 
+Simple JSON errors; could standardize API error responses.
+
+### Soft Delete:
+Deleting now is complete; could be soft to store full records history

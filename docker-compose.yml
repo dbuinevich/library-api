@@ -9,8 +9,11 @@ services:
       POSTGRES_DB: library_api_development
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
+
+  redis:
+    image: redis:7
+    volumes:
+      - redis_data:/data
 
   web:
     build: .
@@ -26,9 +29,23 @@ services:
       - "3000:3000"
     depends_on:
       - db
+      - redis
     environment:
       DATABASE_URL: postgres://postgres:postgres@db:5432/library_api_development
-      RAILS_ENV: development
+      REDIS_URL: redis://redis:6379
+
+  sidekiq:
+    build: .
+    command: bundle exec sidekiq
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+      - redis
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@db:5432/library_api_development
+      REDIS_URL: redis://redis:6379
 
 volumes:
   postgres_data:
+  redis_data:

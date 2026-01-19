@@ -12,10 +12,7 @@ class ReturnBook
   private
 
   def return!
-    borrow_history = @book.borrow_histories
-                          .where(returned_at: nil)
-                          .order(:borrowed_at)
-                          .last
+    borrow_history = @book.borrow_histories.find_by(returned_at: nil)
 
     return if borrow_history.nil?
 
