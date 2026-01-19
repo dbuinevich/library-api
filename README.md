@@ -33,7 +33,7 @@ To run tests inside Docker:
 - GET	/books	List all books with borrow status and reader info
 - GET	/books/:id	Retrieve a specific book with full borrow history
 - POST	/books	Add a new book
-- PUT	/books/:id/update_status	Update book as borrowed or returned
+- PATCH	/books/:id/update_status	Update book as borrowed or returned
 - DELETE	/books/:id	Delete a book
 
 ## Key Design Decisions
